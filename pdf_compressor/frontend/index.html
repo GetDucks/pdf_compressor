@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Target PDF Compressor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <p class="eyebrow">PDF TOOL</p>
+    <h1>Compress a PDF to a target size</h1>
+    <p class="lead">Choose a PDF, set the maximum size, and download the best result.</p>
+    <form id="form">
+      <label class="drop" for="file">
+        <input id="file" type="file" accept=".pdf,application/pdf" required>
+        <strong>Choose or drop a PDF</strong>
+        <span id="fileText">Maximum upload: 100 MB</span>
+      </label>
+      <div class="grid">
+        <label>Target size
+          <div class="target">
+            <input id="target" type="number" min=".1" step=".1" value="2" required>
+            <select id="unit"><option value="mb">MB</option><option value="kb">KB</option></select>
+          </div>
+        </label>
+        <label>Quality floor
+          <select id="mode">
+            <option value="150">Higher readability</option>
+            <option value="90" selected>Balanced</option>
+            <option value="45">Maximum compression</option>
+          </select>
+        </label>
+      </div>
+      <label class="check"><input id="gray" type="checkbox"> Convert to grayscale</label>
+      <button id="submit">Compress PDF</button>
+    </form>
+    <div id="working" class="hidden"><div class="bar"><i></i></div><p>Uploading and compressing…</p></div>
+    <div id="result" class="hidden">
+      <h2>Compression complete</h2>
+      <div class="stats">
+        <div><span>Original</span><b id="original">—</b></div>
+        <div><span>Compressed</span><b id="compressed">—</b></div>
+        <div><span>Reduction</span><b id="reduction">—</b></div>
+      </div>
+      <p id="message"></p>
+      <a id="download">Download compressed PDF</a>
+    </div>
+    <p id="error" class="error hidden"></p>
+  </section>
+</main>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
