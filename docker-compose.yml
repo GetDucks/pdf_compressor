@@ -3,17 +3,7 @@ services:
     build:
       context: ./backend
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     environment:
-      MAX_UPLOAD_BYTES: "100000000"
-      ALLOWED_ORIGINS: "${FRONTEND_ORIGIN}"
-
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "8080:80"
-    environment:
-      API_BASE_URL: "${API_BASE_URL}"
-    depends_on:
-      - backend
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS}"
+      MAX_UPLOAD_BYTES: "${MAX_UPLOAD_BYTES}"
