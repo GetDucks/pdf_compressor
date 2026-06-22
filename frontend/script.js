@@ -8,7 +8,13 @@ $("form").onsubmit=async e=>{
  const data=new FormData();data.append("file",f);data.append("target_mb",target);data.append("minimum_dpi",$("mode").value);data.append("grayscale",$("gray").checked);
  $("working").classList.remove("hidden");$("result").classList.add("hidden");$("error").classList.add("hidden");$("submit").disabled=true;
  try{
-  const base=window.APP_CONFIG.API_BASE_URL.replace(/\/$/,"");
+  const base = window.APP_CONFIG?.API_BASE_URL?.replace(/\/$/, "");
+
+if (!base) {
+    throw new Error(
+        "API_BASE_URL is missing. Check that config.js exists and loads before script.js."
+    );
+}
   const r=await fetch(`${base}/compress`,{method:"POST",body:data});
   if(!r.ok){let j=await r.json().catch(()=>({}));throw Error(j.detail||"Compression failed.")}
   const b=await r.blob(),o=+(r.headers.get("X-Original-Size-Bytes")||f.size),c=+(r.headers.get("X-Compressed-Size-Bytes")||b.size);
